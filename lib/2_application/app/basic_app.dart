@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:todo_list_app/core/routes.dart';
+import 'package:todo_list_app/2_application/core/routes.dart';
 
 class BasicApp extends StatelessWidget {
   const BasicApp({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list_app/core/go_router_observer.dart';
+import 'package:todo_list_app/2_application/core/go_router_observer.dart';
+import 'package:todo_list_app/2_application/pages/home/home_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -10,35 +11,11 @@ final routes = GoRouter(
   observers: [
     GoRouterObserver(),
   ],
-  initialLocation: '/home/start',
+  initialLocation: '/home',
   routes: [
     GoRoute(
-      path: '/home/start',
-      builder: (context, state) => Container(
-        color: Colors.blueGrey,
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () => context.push('/home/settings'),
-              child: const Text("Go to Settings"),
-            ),
-            ElevatedButton(
-              onPressed: () => context.push('/home/task'),
-              child: const Text("Go to Tasks"),
-            ),
-            TextButton(
-              onPressed: () {
-                if (context.canPop()) {
-                  context.pop();
-                } else {
-                  context.push('/home/start');
-                }
-              },
-              child: const Text('Go back'),
-            ),
-          ],
-        ),
-      ),
+      path: '/home',
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: '/home/settings',
@@ -49,7 +26,7 @@ final routes = GoRouter(
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => context.push('/home/start'),
+              onPressed: () => context.push('/home'),
               child: const Text('Go back to StartButton'),
             ),
             TextButton(
@@ -73,7 +50,7 @@ final routes = GoRouter(
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => context.push('/home/start'),
+              onPressed: () => context.push('/home'),
               child: const Text('Start'),
             ),
             ElevatedButton(
