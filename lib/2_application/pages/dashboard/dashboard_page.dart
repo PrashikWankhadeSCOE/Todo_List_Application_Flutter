@@ -4,7 +4,7 @@ import 'package:todo_list_app/2_application/core/page_config.dart';
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
-  static const pagecondfig = PageConfig(
+  static const pageconfig = PageConfig(
     icon: Icons.dashboard_rounded,
     name: 'dashboard',
     child: DashboardPage(),

@@ -7,7 +7,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   static const tabs = [
-    DashboardPage.pagecondfig,
+    DashboardPage.pageconfig,
     OverviewPage.pagecondfig,
   ];
 
