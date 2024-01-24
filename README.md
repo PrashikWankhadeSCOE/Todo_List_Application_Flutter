@@ -5,3 +5,6 @@
 
 - ## Adaptive Layout - Tap Handling
 ![image](./preview_output/tapHandling.gif)
+
+- ## Named Routes
+![](./preview_output/namedRoutes.gif)
