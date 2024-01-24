@@ -2,3 +2,6 @@
 
 - ## Adaptive Layout Basics
 ![image](./preview_output/basic_adaptive_layout.gif)
+
+- ## Adaptive Layout - Tap Handling
+![image](./preview_output/tapHandling.gif)

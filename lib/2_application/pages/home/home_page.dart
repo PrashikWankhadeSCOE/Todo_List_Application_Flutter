@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_list_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_list_app/2_application/pages/settings/settings_page.dart';
+import 'package:todo_list_app/2_application/pages/tasks/tasks_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -15,8 +16,9 @@ class HomePage extends StatefulWidget {
 
   static const tabs = [
     DashboardPage.pageconfig,
-    OverviewPage.pagecondfig,
-    SettingsPage.pagecondfig,
+    OverviewPage.pageconfig,
+    SettingsPage.pageconfig,
+    TaskPage.pageconfig,
   ];
 
   @override
