@@ -8,3 +8,6 @@
 
 - ## Named Routes
 ![](./preview_output/namedRoutes.gif)
+
+- ## ToDo Collection - application
+![](./preview_output/app.gif)
