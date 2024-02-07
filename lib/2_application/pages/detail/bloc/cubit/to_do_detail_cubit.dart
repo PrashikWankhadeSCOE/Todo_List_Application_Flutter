@@ -9,7 +9,7 @@ part 'to_do_detail_state.dart';
 class ToDoDetailCubit extends Cubit<ToDoDetailCubitState> {
   ToDoDetailCubit(
       {required this.collectionId, required this.loadToDoEntryIdsForCollection})
-      : super(ToDoDetailCubitLoadingState());
+      : super(const ToDoDetailCubitLoadingState());
 
   final CollectionId collectionId;
   final LoadToDoEntryIdsForCollection loadToDoEntryIdsForCollection;

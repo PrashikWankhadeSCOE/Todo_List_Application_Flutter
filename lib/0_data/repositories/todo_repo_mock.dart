@@ -1,6 +1,6 @@
 // ignore_for_file: implementation_imports
 
-import 'package:either_dart/src/either.dart';
+import 'package:either_dart/either.dart';
 import 'package:todo_list_app/1_domain/entities/todo_collection.dart';
 import 'package:todo_list_app/1_domain/entities/todo_color.dart';
 import 'package:todo_list_app/1_domain/entities/todo_entry.dart';
@@ -72,5 +72,20 @@ class ToDoRepositoryMock implements ToDoRepository {
     } on Exception catch (e) {
       return Future.value(Left(ServerFailure(stackTrace: e.toString())));
     }
+  }
+
+  @override
+  Future<Either<Failure, ToDoEntry>> updateToDoEntry(
+      {required CollectionId collectionId, required EntryId entryId}) {
+    final index = toDoEntries.indexWhere((element) => element.id == entryId);
+    final entryToDoUpdate = toDoEntries[index];
+    final updatedEntry =
+        toDoEntries[index].copyWith(isDone: !entryToDoUpdate.isDone);
+    toDoEntries[index] = updatedEntry;
+
+    return Future.delayed(
+      const Duration(milliseconds: 100),
+      () => Right(updatedEntry),
+    );
   }
 }
