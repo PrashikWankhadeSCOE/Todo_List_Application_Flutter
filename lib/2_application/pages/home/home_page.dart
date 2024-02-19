@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list_app/2_application/core/page_config.dart';
 import 'package:todo_list_app/2_application/pages/dashboard/dashboard_page.dart';
+import 'package:todo_list_app/2_application/pages/detail/todo_detail_page.dart';
+import 'package:todo_list_app/2_application/pages/home/bloc/navigation_todo_cubit.dart';
 import 'package:todo_list_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_list_app/2_application/pages/settings/settings_page.dart';
 import 'package:todo_list_app/2_application/pages/tasks/tasks_page.dart';
@@ -97,8 +100,25 @@ class _HomePageState extends State<HomePage> {
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.mediumAndUp: SlotLayout.from(
                 key: const Key('Secondary-body'),
-                builder: AdaptiveScaffold.emptyBuilder,
-              )
+                builder: widget.index != 1
+                    ? null
+                    : (_) => BlocBuilder<NavigationToDoCubit,
+                            NavigationToDoCubitState>(
+                          builder: (context, state) {
+                            
+                            final selectedId = state.selectedCollectionId;
+                            final isSecondBodyDisplayed = Breakpoints.mediumAndUp.isActive(context);
+                            context.read<NavigationToDoCubit>().secondBodyHasChanged( isSecondBodyDisplayed: isSecondBodyDisplayed);
+                            if(selectedId == null){
+                              return const Placeholder();
+                            }
+                            return ToDoDetailPageProvider(
+                              key: Key(selectedId.value),
+                              collectionId: selectedId,
+                            );
+                          },
+                        ),
+              ),
             },
           ),
         ),
@@ -106,9 +126,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _tapOnNavigationDestination(BuildContext context, int index) =>
+  void _tapOnNavigationDestination(
+    BuildContext context,
+    int index,
+  ) =>
       context.goNamed(
         HomePage.pageconfig.name,
-        pathParameters: {'tab': HomePage.tabs[index].name},
+        pathParameters: {
+          'tab': HomePage.tabs[index].name,
+        },
       );
 }
