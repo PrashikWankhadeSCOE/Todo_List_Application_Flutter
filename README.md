@@ -12,5 +12,8 @@
 - ## ToDo Collection - application
 ![](./preview_output/app.gif)
 
-- ## 101. ToDo Entry - application
+- ## ToDo Entry - application
 ![](./preview_output/todo_entry_application.gif)
+
+- ## Navigation Cubit
+![](./preview_output/navigation_cubit.gif)
