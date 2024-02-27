@@ -1,5 +1,3 @@
-// ignore_for_file: implementation_imports
-
 import 'package:either_dart/either.dart';
 import 'package:todo_list_app/1_domain/entities/todo_collection.dart';
 import 'package:todo_list_app/1_domain/entities/todo_color.dart';
@@ -12,8 +10,8 @@ class ToDoRepositoryMock implements ToDoRepository {
   final List<ToDoEntry> toDoEntries = List.generate(
     100,
     (index) => ToDoEntry(
-      description: 'description $index',
       id: EntryId.fromUniqueString(index.toString()),
+      description: 'description $index',
       isDone: false,
     ),
   );
@@ -22,10 +20,10 @@ class ToDoRepositoryMock implements ToDoRepository {
     10,
     (index) => ToDoCollection(
       id: CollectionId.fromUniqueString(index.toString()),
+      title: 'title $index',
       color: ToDoColor(
         colorIndex: index % ToDoColor.predefinedColors.length,
       ),
-      title: 'title $index',
     ),
   );
 
@@ -45,8 +43,9 @@ class ToDoRepositoryMock implements ToDoRepository {
   Future<Either<Failure, ToDoEntry>> readToDoEntry(
       CollectionId collectionId, EntryId entryId) {
     try {
-      final selectedEntryItem =
-          toDoEntries.firstWhere((element) => element.id == entryId);
+      final selectedEntryItem = toDoEntries.firstWhere(
+        (element) => element.id == entryId,
+      );
 
       return Future.delayed(
         const Duration(milliseconds: 200),
@@ -61,14 +60,17 @@ class ToDoRepositoryMock implements ToDoRepository {
   Future<Either<Failure, List<EntryId>>> readToDoEntryIds(
       CollectionId collectionId) {
     try {
-      final startindex = int.parse(collectionId.value) * 10;
-      final endIndex = startindex + 10;
+      final startIndex = int.parse(collectionId.value) * 10;
+      final endIndex = startIndex + 10;
       final entryIds = toDoEntries
-          .sublist(startindex, endIndex)
+          .sublist(startIndex, endIndex)
           .map((entry) => entry.id)
           .toList();
+
       return Future.delayed(
-          const Duration(milliseconds: 300), () => Right(entryIds));
+        const Duration(milliseconds: 300),
+        () => Right(entryIds),
+      );
     } on Exception catch (e) {
       return Future.value(Left(ServerFailure(stackTrace: e.toString())));
     }
@@ -78,14 +80,20 @@ class ToDoRepositoryMock implements ToDoRepository {
   Future<Either<Failure, ToDoEntry>> updateToDoEntry(
       {required CollectionId collectionId, required EntryId entryId}) {
     final index = toDoEntries.indexWhere((element) => element.id == entryId);
-    final entryToDoUpdate = toDoEntries[index];
+    final entryToUpdate = toDoEntries[index];
     final updatedEntry =
-        toDoEntries[index].copyWith(isDone: !entryToDoUpdate.isDone);
+        toDoEntries[index].copyWith(isDone: !entryToUpdate.isDone);
     toDoEntries[index] = updatedEntry;
 
     return Future.delayed(
-      const Duration(milliseconds: 100),
-      () => Right(updatedEntry),
-    );
+        const Duration(milliseconds: 100), () => Right(updatedEntry));
+  }
+
+  @override
+  Future<Either<Failure, bool>> createToDoCollection(
+      ToDoCollection collection) {
+    toDoCollections.add(collection);
+    return Future.delayed(
+        const Duration(milliseconds: 100), () => const Right(true));
   }
 }

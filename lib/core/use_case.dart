@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:todo_list_app/1_domain/entities/unique_id.dart';
 import 'package:todo_list_app/1_domain/failures/failures.dart';
 
+import '../1_domain/entities/todo_collection.dart';
+
 abstract class UseCase<Type, Params> {
   Future<Either<Failure, Type>> call(Params params);
 }
@@ -32,4 +34,13 @@ class CollectionIdParams extends Params {
 
   @override
   List<Object?> get props => [collectionId];
+}
+
+class ToDoCollectionParams extends Params {
+  final ToDoCollection collection;
+
+  ToDoCollectionParams({required this.collection}) : super();
+
+  @override
+  List<Object?> get props => [collection];
 }

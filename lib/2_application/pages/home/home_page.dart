@@ -10,6 +10,21 @@ import 'package:todo_list_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_list_app/2_application/pages/settings/settings_page.dart';
 import 'package:todo_list_app/2_application/pages/tasks/tasks_page.dart';
 
+import '../create_todo_collection/create_todo_collection_page.dart';
+
+class HomePageProvider extends StatelessWidget {
+  const HomePageProvider({super.key, required this.tab});
+  final String tab;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<NavigationToDoCubit>(
+      create: (_) => NavigationToDoCubit(),
+      child: HomePage(tab: tab),
+    );
+  }
+}
+
 class HomePage extends StatefulWidget {
   HomePage({
     super.key,
@@ -52,6 +67,13 @@ class _HomePageState extends State<HomePage> {
               Breakpoints.mediumAndUp: SlotLayout.from(
                 key: const Key('primary-navigation-medium'),
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
+                  leading: IconButton(
+                      onPressed: () {
+                        context.pushNamed(
+                            CreateToDoCollectionPage.pageConfig.name);
+                      },
+                      icon: Icon(CreateToDoCollectionPage.pageConfig.icon),
+                      tooltip: 'Add Collection'),
                   trailing: IconButton(
                     onPressed: () =>
                         context.pushNamed(SettingsPage.pageconfig.name),
@@ -105,11 +127,15 @@ class _HomePageState extends State<HomePage> {
                     : (_) => BlocBuilder<NavigationToDoCubit,
                             NavigationToDoCubitState>(
                           builder: (context, state) {
-                            
                             final selectedId = state.selectedCollectionId;
-                            final isSecondBodyDisplayed = Breakpoints.mediumAndUp.isActive(context);
-                            context.read<NavigationToDoCubit>().secondBodyHasChanged( isSecondBodyDisplayed: isSecondBodyDisplayed);
-                            if(selectedId == null){
+                            final isSecondBodyDisplayed =
+                                Breakpoints.mediumAndUp.isActive(context);
+                            context
+                                .read<NavigationToDoCubit>()
+                                .secondBodyHasChanged(
+                                    isSecondBodyDisplayed:
+                                        isSecondBodyDisplayed);
+                            if (selectedId == null) {
                               return const Placeholder();
                             }
                             return ToDoDetailPageProvider(
