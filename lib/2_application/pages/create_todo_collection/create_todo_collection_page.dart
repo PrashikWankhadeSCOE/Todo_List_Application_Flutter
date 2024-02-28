@@ -71,7 +71,7 @@ class _CreateToDoCollectionPageState extends State<CreateToDoCollectionPage> {
                     if (parsedColorIndex == null ||
                         parsedColorIndex < 0 ||
                         parsedColorIndex > ToDoColor.predefinedColors.length) {
-                      return "Only numbers between 0 and ${ToDoColor.predefinedColors.length - 1}";
+                      return "Only numbers between 0 and ${ToDoColor.predefinedColors.length - 1} are allowed";
                     }
                   }
                   return null;

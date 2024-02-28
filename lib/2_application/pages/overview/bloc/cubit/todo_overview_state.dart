@@ -7,9 +7,13 @@ sealed class TodoOverviewCubitState extends Equatable {
   List<Object> get props => [];
 }
 
-final class ToDoOverviewCubitLoadingState extends TodoOverviewCubitState {}
+class ToDoOverviewCubitLoadingState extends TodoOverviewCubitState {
+  const ToDoOverviewCubitLoadingState();
+}
 
-final class ToDoOverviewCubitErrorState extends TodoOverviewCubitState {}
+class ToDoOverviewCubitErrorState extends TodoOverviewCubitState {
+  const ToDoOverviewCubitErrorState();
+}
 
 final class ToDoOverviewCubitLoadedState extends TodoOverviewCubitState {
   const ToDoOverviewCubitLoadedState({required this.collections});

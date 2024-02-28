@@ -10,7 +10,7 @@ class LoadTodoCollections implements UseCase<List<ToDoCollection>, NoParams> {
   const LoadTodoCollections({required this.toDoRepository});
 
   @override
-  Future<Either<Failure, List<ToDoCollection>>> call(params) async {
+  Future<Either<Failure, List<ToDoCollection>>> call(NoParams params) async {
     try {
       final loadedCollections = toDoRepository.readToDoCollections();
       return loadedCollections.fold(

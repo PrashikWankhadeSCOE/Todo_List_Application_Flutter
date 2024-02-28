@@ -27,7 +27,7 @@ class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key});
 
   static const pageconfig = PageConfig(
-    icon: Icons.history_edu_outlined,
+    icon: Icons.work_history_rounded,
     name: 'overview',
     child: OverviewPageProvider(),
   );
