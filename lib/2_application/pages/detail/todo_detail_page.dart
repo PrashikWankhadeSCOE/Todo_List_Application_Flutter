@@ -9,6 +9,8 @@ import 'package:todo_list_app/2_application/pages/detail/view_states/todo_detail
 import 'package:todo_list_app/2_application/pages/detail/view_states/todo_detail_loaded.dart';
 import 'package:todo_list_app/2_application/pages/detail/view_states/todo_detail_loading.dart';
 
+typedef ToDoEntryItemAddedCallback = Function();
+
 class ToDoDetailPageProvider extends StatelessWidget {
   const ToDoDetailPageProvider({super.key, required this.collectionId});
 

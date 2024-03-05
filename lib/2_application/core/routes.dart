@@ -72,6 +72,7 @@ final routes = GoRouter(
       name: CreateToDoEntryPage.pageConfig.name,
       path: '$_basePath/overvier/${CreateToDoEntryPage.pageConfig.name}',
       builder: (context, state) {
+        final castedExtras = state.extra as CreateToDoEntryPageExtra;
         return Scaffold(
           appBar: AppBar(
             title: const Text('create collection'),
@@ -90,7 +91,9 @@ final routes = GoRouter(
           ),
           body: SafeArea(
             child: CreateToDoEntryPageProvider(
-              collectionId: state.extra as CollectionId,
+              collectionId: castedExtras.collectionId,
+              toDoEntryItemAddedCallback:
+                  castedExtras.todoEntryItemAddedCallback,
             ),
           ),
         );
