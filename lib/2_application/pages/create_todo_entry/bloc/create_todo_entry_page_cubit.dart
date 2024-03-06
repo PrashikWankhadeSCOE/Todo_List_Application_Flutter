@@ -37,6 +37,7 @@ class CreateTodoEntryPageCubit extends Cubit<CreateTodoEntryPageState> {
   void submit() async {
     await addToDoEntry.call(
       ToDoEntryParams(
+        collectionId: collectionId,
         entry: ToDoEntry.empty().copyWith(
           description: state.description?.value,
         ),

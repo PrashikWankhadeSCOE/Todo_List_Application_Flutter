@@ -8,7 +8,7 @@ import 'package:todo_list_app/2_application/pages/detail/todo_detail_page.dart';
 import 'package:todo_list_app/2_application/pages/home/bloc/navigation_todo_cubit.dart';
 import 'package:todo_list_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_list_app/2_application/pages/settings/settings_page.dart';
-import 'package:todo_list_app/2_application/pages/tasks/tasks_page.dart';
+// import 'package:todo_list_app/2_application/pages/tasks/tasks_page.dart';
 
 import '../create_todo_collection/create_todo_collection_page.dart';
 
@@ -41,7 +41,7 @@ class HomePage extends StatefulWidget {
   static const tabs = [
     DashboardPage.pageconfig,
     OverviewPage.pageconfig,
-    TaskPage.pageconfig,
+    // TaskPage.pageconfig,
   ];
 
   @override
@@ -58,7 +58,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: AdaptiveLayout(
@@ -68,9 +67,13 @@ class _HomePageState extends State<HomePage> {
                 key: const Key('primary-navigation-medium'),
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
                   leading: IconButton(
-                      onPressed: () {
-                        context.pushNamed(
+                      key: const Key('create-todo-collection'),
+                      onPressed: () async {
+                        final result = await context.pushNamed(
                             CreateToDoCollectionPage.pageConfig.name);
+                        if (result == true) {
+                          debugPrint('Item was created successfully');
+                        }
                       },
                       icon: Icon(CreateToDoCollectionPage.pageConfig.icon),
                       tooltip: 'Add Collection'),
@@ -79,12 +82,6 @@ class _HomePageState extends State<HomePage> {
                         context.pushNamed(SettingsPage.pageconfig.name),
                     icon: Icon(SettingsPage.pageconfig.icon),
                   ),
-                  selectedLabelTextStyle:
-                      TextStyle(color: theme.colorScheme.onBackground),
-                  selectedIconTheme:
-                      IconThemeData(color: theme.colorScheme.onBackground),
-                  unselectedIconTheme: IconThemeData(
-                      color: theme.colorScheme.onBackground.withOpacity(0.5)),
                   onDestinationSelected: (index) =>
                       _tapOnNavigationDestination(context, index),
                   selectedIndex: widget.index,
@@ -98,7 +95,7 @@ class _HomePageState extends State<HomePage> {
           bottomNavigation: SlotLayout(
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.small: SlotLayout.from(
-                key: const Key('Bottom-Navigation_samll'),
+                key: const Key('Bottom-Navigation_small'),
                 builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
                   currentIndex: widget.index,
                   destinations: destinations,

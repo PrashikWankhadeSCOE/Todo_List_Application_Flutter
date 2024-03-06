@@ -103,7 +103,7 @@ class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
                   if (isValid == true) {
                     context.read<CreateTodoEntryPageCubit>().submit();
                     widget.toDoEntryItemAddedCallback.call();
-                    context.pop();
+                    context.pop(true);
                   }
                 },
                 child: const Text('Save Entry'),

@@ -108,7 +108,8 @@ class ToDoRepositoryMock implements ToDoRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createToDoEntry(ToDoEntry entry) {
+  Future<Either<Failure, bool>> createToDoEntry(
+      CollectionId collectionId, ToDoEntry entry) {
     toDoEntries.add(entry);
     return Future.delayed(
       const Duration(milliseconds: 250),
